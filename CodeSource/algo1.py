@@ -1,52 +1,52 @@
-
-tabsurface = [32,48,60,157,76,90]
-tabprix = [69.5,299,146,471.6,66,190]
+from methodeLecture import lecture_fichier
 
 def algo() :
-    compteurX = 0
-    compteurY = 0
+    #Initialisation de sommeAll qui permet de calculer la somme des x et y
     sommeAll = 0
+    #Initialisation de sommeQuadra qui sert à faire la somme des x au carré
     sommeQuadra = 0
-    print("Calcul de la moyenne du jeu de données (valeur x) : ")
-    for element in tabsurface :
-        compteurX = compteurX + 1
-    moyenneX = sum(tabsurface)/compteurX
-    print(moyenneX)
-    print("Calcul de la moyenne du jeu de données (valeur y) : ")
-    for element in tabprix :
-        compteurY = compteurY + 1
-    moyenneY = sum(tabprix)/compteurY
-    print(moyenneY)
+
+    #Calcul de la moyenne du jeu de données (valeur x)
+    moyenneX = sum(surface_appartements)/len(surface_appartements)
+
+    #Calcul de la moyenne du jeu de données (valeur y)
+    moyenneY = sum(prix_appartements)/len(prix_appartements)
+
+    #Calcul de la moyenne de x * la moyenne de y
     produitMoyenne = moyenneX*moyenneY
-    print("Moyenne de x * moyenne de y : \n" + str(produitMoyenne))
-    print("Moyenne de x*y : ")
-    for i in range(len(tabsurface)) :
-        sommeAll = sommeAll + tabsurface[i]*tabprix[i]
-    moyenneXY = sommeAll/compteurX
-    print(moyenneXY)
-    print("Covariance de (x,y) : ")
+
+    #Moyenne de x*y
+    for i in range(len(surface_appartements)) :
+        sommeAll = sommeAll + surface_appartements[i]*prix_appartements[i]
+    moyenneXY = sommeAll/len(surface_appartements)
+
+    #Covariance de (x,y)
     covarianceXY = moyenneXY-produitMoyenne
-    print(covarianceXY)
-    print("\n")
-    print("Calcul de la moyenne quadratique : ")
-    for i in range(len(tabsurface)) :
-        sommeQuadra = sommeQuadra + tabsurface[i]**2
-    moyenneQuadra = sommeQuadra/compteurX
-    print(moyenneQuadra)
-    print("Calcul de la moyenne au carré : ")
+
+    #Calcul de la moyenne quadratique
+    for i in range(len(surface_appartements)) :
+        #Somme des Xi au carré
+        sommeQuadra = sommeQuadra + surface_appartements[i]**2
+    moyenneQuadra = sommeQuadra/len(surface_appartements)
+
+    #Calcul de la moyenne au carré
     moyenneXCarre = moyenneX**2
-    print(moyenneXCarre)
-    print("Calcul de la variance de x : ")
+
+    #Calcul de la variance de x
     varianceX = moyenneQuadra-moyenneXCarre
-    print(varianceX)
-    print("\n\n")
-    print("Calcul de a : ")
+
+    #Calcul de a
     a = covarianceXY/varianceX
-    print(a)
-    print("Calcul de b : ")
+
+    #Calcul de b
     b = moyenneY-a*moyenneX
-    print(b)
+
     print("\nModèle d'estimation pour calculer le prix d'un appartement : ")
+    #{0:.2f} sert à afficher 2 chiffres après la virgule
     print("y = {0:.2f}".format(a) + "x + {0:.2f}".format(b))
 
+try:
+    surface_appartements, prix_appartements = lecture_fichier("..\donnees.txt")   
+except ValueError as erreur: #Levée de l'exception si mauvais format du fichier
+    print(erreur)
 algo()

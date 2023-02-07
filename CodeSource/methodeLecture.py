@@ -17,10 +17,4 @@ def lecture_fichier(fichier_path):
            
     return surface_appartements, prix_appartements
 
-try:
-    surface_appartements, prix_appartements = lecture_fichier('../donnees.txt')
-    print(surface_appartements) #TODO a supprimer pour Dev
-    print(prix_appartements)    #TODO a supprimer pour Dev
-   
-except ValueError as erreur: #Levée de l'exception si mauvais format du fichier
-    print(erreur)
+
