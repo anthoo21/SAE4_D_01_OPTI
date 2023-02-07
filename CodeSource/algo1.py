@@ -1,6 +1,6 @@
 from methodeLecture import lecture_fichier
 
-def algo() :
+def algo(x) :
     #Initialisation de sommeAll qui permet de calculer la somme des x et y
     sommeAll = 0
     #Initialisation de sommeQuadra qui sert à faire la somme des x au carré
@@ -45,8 +45,13 @@ def algo() :
     #{0:.2f} sert à afficher 2 chiffres après la virgule
     print("y = {0:.2f}".format(a) + "x + {0:.2f}".format(b))
 
+    calcul = (a*x+b)*1000
+
+    print("\nPrix d'un appartement pour " + str(x) + "m² : ")
+    return print("{0:.2f}".format(calcul) + "€")
+
 try:
     surface_appartements, prix_appartements = lecture_fichier("..\donnees.txt")   
 except ValueError as erreur: #Levée de l'exception si mauvais format du fichier
     print(erreur)
-algo()
+algo(89)
