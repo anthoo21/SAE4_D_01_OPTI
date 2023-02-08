@@ -1,0 +1,118 @@
+import math
+from methodeLecture import lecture_fichier
+
+def calculIndicateurs() :
+    indicateursX = []  # Moyenne des x, 'médiane des x', variance de x, écartType de x
+    indicateursY = []  # Moyenne des y, 'médiane des y', variance de y, écartType de y
+    indicateursXY = [] # Covariance, 'coefficient de corrélation linéaire'
+    
+    #Initialisation de sommeAll qui permet de calculer la somme des x et y
+    sommeAll = 0
+    #Initialisation de sommeQuadraX qui sert à faire la somme des x au carré
+    sommeQuadraX = 0
+    #Initialisation de sommeQuadraY qui sert à faire la somme des y au carré
+    sommeQuadraY = 0
+
+
+    #Calcul de la moyenne du jeu de données (valeur x)
+    moyenneX = sum(surface_appartements)/len(surface_appartements)
+    indicateursX.append(moyenneX)
+
+    #Calcul de la moyenne du jeu de données (valeur y)
+    moyenneY = sum(prix_appartements)/len(prix_appartements)
+    indicateursY.append(moyenneY)
+
+    #Calcul de la moyenne de x * la moyenne de y
+    produitMoyenne = moyenneX*moyenneY
+
+    #Moyenne de x*y
+    for i in range(len(surface_appartements)) :
+        sommeAll = sommeAll + surface_appartements[i]*prix_appartements[i]
+    moyenneXY = sommeAll/len(surface_appartements)
+
+    #Covariance de (x,y)
+    covarianceXY = moyenneXY-produitMoyenne
+    indicateursXY.append(covarianceXY)
+
+
+    #Calcul de la moyenne quadratique des X
+    for i in range(len(surface_appartements)) :
+        #Somme des Xi au carré
+        sommeQuadraX = sommeQuadraX + surface_appartements[i]**2
+    moyenneQuadraX = sommeQuadraX/len(surface_appartements)
+
+    #Calcul de la moyenne quadratique des Y
+    for i in range(len(prix_appartements)) :
+        #Somme des Yi au carré
+        sommeQuadraY = sommeQuadraY + prix_appartements[i]**2
+    moyenneQuadraY = sommeQuadraY/len(prix_appartements)
+
+    #Calcul de la moyenne des X au carré
+    moyenneXCarre = moyenneX**2
+
+    #Calcul de la moyenne des Y au carré
+    moyenneYCarre = moyenneY**2
+
+    #Calcul de la variance de x
+    varianceX = moyenneQuadraX-moyenneXCarre
+    indicateursX.append(varianceX)
+
+    #Calcul de la variance de x
+    varianceY = moyenneQuadraY-moyenneYCarre
+    indicateursY.append(varianceY)
+
+
+    #Calcul de l'écart type de x
+    ecartTypeX = math.sqrt(varianceX)
+    indicateursX.append(ecartTypeX)
+
+    #Calcul de l'écart type de y
+    ecartTypeY = math.sqrt(varianceY)
+    indicateursY.append(ecartTypeY)
+
+    return indicateursX, indicateursY, indicateursXY
+
+try:
+    surface_appartements, prix_appartements = lecture_fichier("..\donnees.txt")   
+except ValueError as erreur: #Levée de l'exception si mauvais format du fichier
+    print(erreur)
+  
+    
+def algo1(indiX, indiY, indiXY) :
+
+    #Calcul de a = covarianceXY/varianceX
+    a = indiXY[0]/indiX[1]
+
+    #Calcul de b = moyenneY-a*moyenneX
+    b = indiY[0]-a*indiX[0]
+
+    print("\nModèle d'estimation pour calculer le prix d'un appartement : ")
+    #{0:.2f} sert à afficher 2 chiffres après la virgule
+    print("y = {0:.2f}".format(a) + "x + {0:.2f}".format(b))
+    return a,b
+
+def algo2(x) :
+    #TODO
+    print('TODO')
+
+def affichageIndicateurs(indiX, indiY, indiXY) :
+    print("\n* ---- Différents indicateurs concernant les données ---- *")
+    print("Indicateurs concernant les surfaces :")
+    print ("Moyenne : " + str(indiX[0]) + "Médiane : TODO " + " mètres carrés.\nVariance : "
+           +  str(indiX[1]) + "\nEcartType : " + str(indiX[2]))
+    
+    print("\nIndicateurs concernant les prix :")
+    print ("Moyenne : " + str(indiY[0]) + "Médiane : TODO " + " mètres carrés.\nVariance : "
+           + str(indiY[1]) + "\nEcartType : " + str(indiY[2]))
+    
+    print("\nAutres indicateurs :")
+    print ("Covariance : " + str(indiXY[0]) + "\nCoefficient de corrélation linéaire : TODO ")
+
+def estimationPrix(surface, a, b) :
+
+    calcul = (a*surface+b)*1000
+
+    print("\nPrix d'un appartement pour " + str(surface) + "m² : ")
+    return print("{0:.2f}".format(calcul) + "€")
+
+#Programme principal
