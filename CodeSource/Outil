@@ -75,8 +75,7 @@ def calculIndicateurs() :
 try:
     surface_appartements, prix_appartements = lecture_fichier("..\donnees.txt")   
 except ValueError as erreur: #Levée de l'exception si mauvais format du fichier
-    print(erreur)
-  
+    print(erreur) 
     
 def algo1(indiX, indiY, indiXY) :
 
@@ -148,7 +147,7 @@ while (entree == 0) : #Ne s'arrête que lorsqu'une valeur est entrée
     except ValueError:#Si l'entrée n'est pas un entier
         print("Erreur : vous n'avez pas entré un nombre entier compris entre 1 et 5.")
 
-while (testOK == True) :
+if (testOK == True) :
     if (entree == 1) :
         indicateursX, indicateursY, indicateursXY = calculIndicateurs()
         affichageIndicateurs(indicateursX, indicateursY, indicateursXY)
