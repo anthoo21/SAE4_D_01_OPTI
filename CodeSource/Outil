@@ -98,11 +98,11 @@ def algo2(x) :
 def affichageIndicateurs(indiX, indiY, indiXY) :
     print("\n* ---- Différents indicateurs concernant les données ---- *")
     print("Indicateurs concernant les surfaces :")
-    print ("Moyenne : " + str(indiX[0]) + "Médiane : TODO " + " mètres carrés.\nVariance : "
+    print ("Moyenne : " + str(indiX[0]) + "\nMédiane : TODO " + " mètres carrés.\nVariance : "
            +  str(indiX[1]) + "\nEcartType : " + str(indiX[2]))
     
     print("\nIndicateurs concernant les prix :")
-    print ("Moyenne : " + str(indiY[0]) + "Médiane : TODO " + " mètres carrés.\nVariance : "
+    print ("Moyenne : " + str(indiY[0]) + "\nMédiane : TODO " + " mètres carrés.\nVariance : "
            + str(indiY[1]) + "\nEcartType : " + str(indiY[2]))
     
     print("\nAutres indicateurs :")
@@ -111,8 +111,64 @@ def affichageIndicateurs(indiX, indiY, indiXY) :
 def estimationPrix(surface, a, b) :
 
     calcul = (a*surface+b)*1000
+    #On multiplie par mille pour avoir le résultat en milliers
 
     print("\nPrix d'un appartement pour " + str(surface) + "m² : ")
     return print("{0:.2f}".format(calcul) + "€")
 
 #Programme principal
+#Initialisation des variables
+indicateursX = []  # Moyenne des x, 'médiane des x', variance de x, écartType de x
+indicateursY = []  # Moyenne des y, 'médiane des y', variance de y, écartType de y
+indicateursXY = [] # Covariance, 'coefficient de corrélation linéaire'
+a = 0
+b = 0
+entree = 0
+testOK = False
+#Fin de l'initialisation
+
+print("*  -----------------------------------------------------------------------------------  *")
+print("*  Bienvenue dans l'outil d'aide à la détermination du prix de vente d'un appartement ! *")
+print("*  -----------------------------------------------------------------------------------  *")
+print("*  Options disponibles :                                                                *")
+print("*  1 - Affichage des indicateurs associés au jeu de données                             *")
+print("*  2 - Calcul du modèle par résolution analytique                                       *")
+print("*  3 - Calcul du modèle par descente de gradient                                        *")
+print("*  4 - Estimation du prix d'un appartement à partir d'un modèle                         *")
+print("*  5 - Quitter l'outil                                                                  *")
+print("*  -----------------------------------------------------------------------------------  *")
+
+while (entree == 0) : #Ne s'arrête que lorsqu'une valeur est entrée
+    try:
+        entree = int(input("\nSélectionnez une option (entre 1 et 5) : "))
+        if 1 <= entree <= 5: #Vérifie que l'entrée respecte le format
+            testOK = True
+        else:
+            raise ValueError()
+    except ValueError:#Si l'entrée n'est pas un entier
+        print("Erreur : vous n'avez pas entré un nombre entier compris entre 1 et 5.")
+
+while (testOK == True) :
+    if (entree == 1) :
+        indicateursX, indicateursY, indicateursXY = calculIndicateurs()
+        affichageIndicateurs(indicateursX, indicateursY, indicateursXY)
+        
+    elif (entree == 2) :
+        if (indicateursX == []) :
+            indicateursX, indicateursY, indicateursXY = calculIndicateurs()
+            
+        a, b = algo1(indicateursX, indicateursY, indicateursXY)
+    elif (entree == 3) :
+        print("Méthode en cours d'implémentation, merci de votre compréhension !")
+
+    elif (entree == 4) :
+        if (indicateursX == [] or a == 0) :
+            indicateursX, indicateursY, indicateursXY = calculIndicateurs()
+            a, b = algo1(indicateursX, indicateursY, indicateursXY)
+
+        entreeSurface = int(input("\nEntrez la surface de votre appartement (nombre entier): "))  
+        estimationPrix(entreeSurface, a, b)
+            
+    else :
+        print("Merci d'avoir utilisé notre outil !")
+        testOK = False
