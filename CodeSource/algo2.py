@@ -2,16 +2,13 @@
 # utile ?
 # https://cpge.frama.io/fiches-cpge/Python/70-Derivee_Int%C3%A9grale/
 
-from scipy.misc import derivative  # Fonction de dérivation
-import numpy as np
+import time
 
 x=[32,48,60,157,76,90]
 y=[69.5,299,146,471.6,66,190]
-a = 2.64 # valeur aléatoire
-b = 3.53 # valeur aléatoire
 
 # Fonction derivée à partir de a
-def functionA():
+def functionA(a, b):
     sommeCarreX = 0
     sommeX = 0
     sommeXY = 0
@@ -26,7 +23,7 @@ def functionA():
     return deriver
 
 # Fonction derivée à partir de b
-def functionB():
+def functionB(a, b):
     sommeX = 0
     sommeY = 0
     for i in range(len(x)):
@@ -36,5 +33,18 @@ def functionB():
     deriver = 2*(a*sommeX+len(x)*b-sommeY)
     return deriver
 
-print(functionA())
-print(functionB())
+def gradient(a, b, pas):
+    isFini = True
+    while(isFini):
+        if(abs(functionA(a,b)) <= 0.001 and abs(functionB(a,b)) <= 0.001):
+            isFini = False
+        nouvA = functionA(a, b)
+        nouvB = functionB(a, b)
+        a = a-nouvA*pas
+        b = b-nouvB*pas
+    return a,b
+
+a = 1
+b = 1
+pas = 0.0000001
+print(gradient(a, b ,pas))
