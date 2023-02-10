@@ -46,5 +46,5 @@ def gradient(a, b, pas):
 
 a = 1
 b = 1
-pas = 0.0000001
+pas = 0.00001
 print(gradient(a, b ,pas))
