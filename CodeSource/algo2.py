@@ -3,9 +3,7 @@
 # https://cpge.frama.io/fiches-cpge/Python/70-Derivee_Int%C3%A9grale/
 
 import time
-
-x=[32,48,60,157,76,90]
-y=[69.5,299,146,471.6,66,190]
+from methodeLecture import lecture_fichier
 
 # Fonction derivée à partir de a
 def functionA(a, b):
@@ -44,6 +42,10 @@ def gradient(a, b, pas):
         b = b-nouvB*pas
     return a,b
 
+try:
+    x, y = lecture_fichier("..\donnees.txt")   
+except ValueError as erreur: #Levée de l'exception si mauvais format du fichier
+    print(erreur)
 a = 1
 b = 1
 pas = 0.00001
