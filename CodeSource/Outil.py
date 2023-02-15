@@ -208,8 +208,6 @@ def entreeMenu() :
 indicateursX = []  # Moyenne des x, 'médiane des x', variance de x, écartType de x
 indicateursY = []  # Moyenne des y, 'médiane des y', variance de y, écartType de y
 indicateursXY = [] # Covariance, 'coefficient de corrélation linéaire'
-a = 5
-b = 8
 pas = 0.00001
 #Fin de l'initialisation
 
@@ -220,6 +218,8 @@ print("*  ----------------------------------------------------------------------
 testOK, entree = entreeMenu()
 
 while (testOK == True) :
+    a = 5
+    b = 8
     if (entree == 1) :
         indicateursX, indicateursY, indicateursXY = calculIndicateurs()
         affichageIndicateurs(indicateursX, indicateursY, indicateursXY)
