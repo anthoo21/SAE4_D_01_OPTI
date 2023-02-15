@@ -87,6 +87,10 @@ def calculIndicateurs() : #Méthode utile pour l'affichage des indicateurs et po
     #Covariance de (x,y)
     covarianceXY = moyenneXY-produitMoyenne
     indicateursXY.append(covarianceXY)
+    
+    #Coefficient de corrélation linéaire
+    coefficientXY = covarianceXY/(ecartTypeX*ecartTypeY)
+    indicateursXY.append(coefficientXY)
 
     return indicateursX, indicateursY, indicateursXY
 
@@ -166,14 +170,14 @@ def affichageIndicateurs(indiX, indiY, indiXY) : #Prend en paramètre trois tabl
     print("\n* ---- Différents indicateurs concernant les données ---- *")
     print("Indicateurs concernant les surfaces :")
     print ("Moyenne : " + str(indiX[0]) + " mètres carrés.\nMédiane : " + str(indiX[1]) + " mètres carrés.\nVariance : "
-           +  str(indiX[2]) + "\nEcartType : " + str(indiX[3]))
+           +  str(indiX[2]) + "\nEcartType : " + str(indiX[3]) + " mètres carrés.")
     
     print("\nIndicateurs concernant les prix :")
-    print ("Moyenne : " + str(indiY[0]) + "€\nMédiane : "  + str(indiY[1]) + "€\nVariance : "
-           + str(indiY[2]) + "\nEcartType : " + str(indiY[3]))
+    print ("Moyenne : " + str(indiY[0]) + " €\nMédiane : "  + str(indiY[1]) + " €\nVariance : "
+           + str(indiY[2]) + "\nEcartType : " + str(indiY[3]) + " €")
     
     print("\nAutres indicateurs :")
-    print ("Covariance : " + str(indiXY[0]) + "\nCoefficient de corrélation linéaire : TODO ")
+    print ("Covariance : " + str(indiXY[0]) + "\nCoefficient de corrélation linéaire : "+ str(indiXY[1]))
 
 def entreeMenu() :
 
