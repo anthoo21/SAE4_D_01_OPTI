@@ -101,30 +101,32 @@ try:
 except ValueError as erreur: #Levée de l'exception si mauvais format du fichier
     print(erreur)
   
+sommeCarreX = 0
+sommeX = 0
+sommeY = 0
+sommeXY = 0
+for i in range(len(surface_appartements)):
+    carre = surface_appartements[i]**2
+    sommeCarreX = carre + sommeCarreX
+for i in range(len(surface_appartements)):
+    sommeX = surface_appartements[i] + sommeX
+for i in range(len(surface_appartements)):
+    sommeXY = surface_appartements[i] * prix_appartements[i] + sommeXY    
+for i in range(len(surface_appartements)):
+    sommeY = prix_appartements[i] + sommeY  
 
 # Fonction derivée à partir de a
 def functionA(a, b):
-    sommeCarreX = 0
-    sommeX = 0
-    sommeXY = 0
-    for i in range(len(surface_appartements)):
-        carre = surface_appartements[i]**2
-        sommeCarreX = carre + sommeCarreX
-    for i in range(len(surface_appartements)):
-        sommeX = surface_appartements[i] + sommeX
-    for i in range(len(surface_appartements)):
-        sommeXY = surface_appartements[i] * prix_appartements[i] + sommeXY    
+    global sommeCarreX
+    global sommeX
+    global sommeXY
     deriver = 2*(a*sommeCarreX+b*sommeX-sommeXY)
     return deriver
 
 # Fonction derivée à partir de b
 def functionB(a, b):
-    sommeX = 0
-    sommeY = 0
-    for i in range(len(surface_appartements)):
-        sommeX = surface_appartements[i] + sommeX
-    for i in range(len(surface_appartements)):
-        sommeY = prix_appartements[i] + sommeY    
+    global sommeX
+    global sommeY
     deriver = 2*(a*sommeX+len(surface_appartements)*b-sommeY)
     return deriver
     
@@ -141,13 +143,14 @@ def algo1(indiX, indiY, indiXY) :
 
 def algo2(a, b, pas):
     isFini = True
+
     while(isFini):
-        if(abs(functionA(a,b)) <= 0.001 and abs(functionB(a,b)) <= 0.001):
+        valA = functionA(a, b)
+        valB = functionB(a, b)
+        if(abs(valA) <= 0.001 and abs(valB) <= 0.001):
             isFini = False
-        nouvA = functionA(a, b)
-        nouvB = functionB(a, b)
-        a = a-nouvA*pas
-        b = b-nouvB*pas
+        a = a-valA*pas
+        b = b-valB*pas
     return a,b
 
 
@@ -215,7 +218,7 @@ def entreeMenu() :
 indicateursX = []  # Moyenne des x, 'médiane des x', variance de x, écartType de x
 indicateursY = []  # Moyenne des y, 'médiane des y', variance de y, écartType de y
 indicateursXY = [] # Covariance, 'coefficient de corrélation linéaire'
-pas = 0.1
+pas = 0.00001
 #Fin de l'initialisation
 
 print("*  -----------------------------------------------------------------------------------  *")
