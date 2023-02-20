@@ -1,5 +1,7 @@
 import math
 from methodeLecture import lecture_fichier
+import matplotlib.pyplot as plt
+import numpy as np
 
 def calculIndicateurs() : #Méthode utile pour l'affichage des indicateurs et pour l'algo1
     
@@ -187,13 +189,14 @@ def entreeMenu() :
     print("*  2 - Calcul du modèle par résolution analytique                                       *")
     print("*  3 - Calcul du modèle par descente de gradient                                        *")
     print("*  4 - Estimation du prix d'un appartement à partir d'un modèle                         *")
-    print("*  5 - Quitter l'outil                                                                  *")
+    print("*  5 - Affichage graphique du modèle linéaire                                           *")
+    print("*  6 - Quitter l'outil                                                                  *")
     print("*  -----------------------------------------------------------------------------------  *")
     
     while (entree == 0) : #Ne s'arrête que lorsqu'une valeur est entrée
         try:
-            entree = int(input("\nSélectionnez une option (entre 1 et 5) : "))
-            if 1 <= entree <= 5: #Vérifie que l'entrée respecte le format
+            entree = int(input("\nSélectionnez une option (entre 1 et 6) : "))
+            if 1 <= entree <= 6: #Vérifie que l'entrée respecte le format
                 testOK = True
             else:
                 raise ValueError()
@@ -208,7 +211,7 @@ def entreeMenu() :
 indicateursX = []  # Moyenne des x, 'médiane des x', variance de x, écartType de x
 indicateursY = []  # Moyenne des y, 'médiane des y', variance de y, écartType de y
 indicateursXY = [] # Covariance, 'coefficient de corrélation linéaire'
-pas = 0.00001
+pas = 0.1
 #Fin de l'initialisation
 
 print("*  -----------------------------------------------------------------------------------  *")
@@ -255,7 +258,18 @@ while (testOK == True) :
 
         print("\n\n\n\n") #Espaces pour aérer l'affichage
         testOK, entree = entreeMenu()   #Permet de revenir au menu
-            
+    elif (entree == 5) :
+        if (indicateursX == []) :
+            indicateursX, indicateursY, indicateursXY = calculIndicateurs()
+        a, b = algo1(indicateursX, indicateursY, indicateursXY)
+        plt.title("Approximation affine")
+        plt.scatter(surface_appartements, prix_appartements)
+        plt.plot([0, max(surface_appartements)],[a*0+b,a*max(surface_appartements)+b], color='red')
+        plt.xlabel('Surface appartements')
+        plt.ylabel('Prix appartements en millier')
+        plt.show()
+        testOK, entree = entreeMenu()
+
     else :
         print("Merci d'avoir utilisé notre outil !")
         testOK = False
