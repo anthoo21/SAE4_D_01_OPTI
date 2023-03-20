@@ -1,10 +1,15 @@
 # Description du projet
+
 Le projet "Outil d'aide à la détermination du prix de vente d'un appartement" a lieu dans le cadre de la 2e année de BUT Informatique, au sein de l'IUT de Rodez.
 L'objectif du projet est la déterminataion d'un modèle permettant le calcul du prix de vente d'un appartement, à partir d'un jeu de données.
 La recherche du modèle se fait grâce à deux méthodes : par résolution analytique ou par descente de gradient.
 
 Le projet est codé en python et la base de donnée est un fichier txt.
 Participants au projet : Anthony ENJALBERT, Jean François FROMENT et Julie BONNET
+
+# Lancer le projet
+
+Pour lancer le projet, il suffit de lancer le fichier "LogicielAlgo.bat".
 
 # Répartition des rôles 
 

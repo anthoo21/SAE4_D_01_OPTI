@@ -1,2 +1,2 @@
-cd CodeSource
-python Outil.py
+cd CodeSource/dist
+start Outil.exe
