@@ -18,11 +18,10 @@ Pour lancer le projet, il suffit de lancer le fichier "LogicielAlgo.bat".
 # Déinition de fini
 
 1. Toutes les tâches de développement sont terminées
-2. Les tests unitaires sont rédigés et vérifiés
-3. Le code source est push sur github sur la branche principale
-5. La revue croisée du code a été réalisée
-8. Les tests d’intégration ont été joués et validés 
-10. Le rapport est mis à jour 
+2. Le code source est push sur github sur la branche principale
+3. La revue croisée du code a été réalisée
+4. Les tests d’intégration ont été joués et validés 
+5. Le rapport est mis à jour 
 
 # Lien vers les ressources utiles au projet
 Drive du projet : https://drive.google.com/drive/folders/1sRAIfc0evhDOogPf-OVtuze_hn5nDNIG?usp=share_link
