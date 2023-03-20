@@ -1,11 +1,7 @@
 import math
-import sys
 from methodeLecture import lecture_fichier
 import matplotlib.pyplot as plt
 import numpy as np
-
-if getattr(sys, 'frozen', False):
-    sys.stdin = open(0)
 
 def calculIndicateurs() : #Méthode utile pour l'affichage des indicateurs et pour l'algo1
     
@@ -101,7 +97,7 @@ def calculIndicateurs() : #Méthode utile pour l'affichage des indicateurs et po
     return indicateursX, indicateursY, indicateursXY
 
 try:
-    surface_appartements, prix_appartements = lecture_fichier("donnees.txt")   
+    surface_appartements, prix_appartements = lecture_fichier("../donnees.txt")   
 except ValueError as erreur: #Levée de l'exception si mauvais format du fichier
     print(erreur)
 
