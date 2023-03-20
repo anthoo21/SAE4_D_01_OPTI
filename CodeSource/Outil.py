@@ -100,20 +100,6 @@ try:
     surface_appartements, prix_appartements = lecture_fichier("..\donnees.txt")   
 except ValueError as erreur: #Levée de l'exception si mauvais format du fichier
     print(erreur)
-  
-sommeCarreX = 0
-sommeX = 0
-sommeY = 0
-sommeXY = 0
-for i in range(len(surface_appartements)):
-    carre = surface_appartements[i]**2
-    sommeCarreX = carre + sommeCarreX
-for i in range(len(surface_appartements)):
-    sommeX = surface_appartements[i] + sommeX
-for i in range(len(surface_appartements)):
-    sommeXY = surface_appartements[i] * prix_appartements[i] + sommeXY    
-for i in range(len(surface_appartements)):
-    sommeY = prix_appartements[i] + sommeY  
 
 # Fonction derivée à partir de a
 def functionA(a, b):
@@ -155,7 +141,6 @@ def algo2(a, b, pas):
         b = b-valB*pas
         compteur = compteur + 1
     return a,b
-
 
 def estimationPrix(surface, a, b) :
 
@@ -222,7 +207,22 @@ indicateursX = []  # Moyenne des x, 'médiane des x', variance de x, écartType 
 indicateursY = []  # Moyenne des y, 'médiane des y', variance de y, écartType de y
 indicateursXY = [] # Covariance, 'coefficient de corrélation linéaire'
 pas = 0.000001
+sommeCarreX = 0
+sommeX = 0
+sommeY = 0
+sommeXY = 0
+
 #Fin de l'initialisation
+
+for i in range(len(surface_appartements)):
+    carre = surface_appartements[i]**2
+    sommeCarreX = carre + sommeCarreX
+for i in range(len(surface_appartements)):
+    sommeX = surface_appartements[i] + sommeX
+for i in range(len(surface_appartements)):
+    sommeXY = surface_appartements[i] * prix_appartements[i] + sommeXY    
+for i in range(len(surface_appartements)):
+    sommeY = prix_appartements[i] + sommeY  
 
 print("*  -----------------------------------------------------------------------------------  *")
 print("*  Bienvenue dans l'outil d'aide à la détermination du prix de vente d'un appartement ! *")
