@@ -143,14 +143,17 @@ def algo1(indiX, indiY, indiXY) :
 
 def algo2(a, b, pas):
     isFini = True
-
+    compteur = 0
     while(isFini):
         valA = functionA(a, b)
         valB = functionB(a, b)
         if(abs(valA) <= 0.001 and abs(valB) <= 0.001):
             isFini = False
+        if compteur == 10000000 :
+            isFini = False
         a = a-valA*pas
         b = b-valB*pas
+        compteur = compteur + 1
     return a,b
 
 
@@ -175,11 +178,11 @@ def affichageIndicateurs(indiX, indiY, indiXY) : #Prend en paramètre trois tabl
     print("\n* ---- Différents indicateurs concernant les données ---- *")
     print("Indicateurs concernant les surfaces :")
     print ("Moyenne : " + str(indiX[0]) + " mètres carrés.\nMédiane : " + str(indiX[1]) + " mètres carrés.\nVariance : "
-           +  str(indiX[2]) + "\nEcartType : " + str(indiX[3]) + " mètres carrés.")
+           +  str(indiX[2]) + " mètres carrés au carrés.\nEcartType : " + str(indiX[3]) + " mètres carrés.")
     
     print("\nIndicateurs concernant les prix :")
     print ("Moyenne : " + str(indiY[0]) + " €\nMédiane : "  + str(indiY[1]) + " €\nVariance : "
-           + str(indiY[2]) + "\nEcartType : " + str(indiY[3]) + " €")
+           + str(indiY[2]) + " €²\nEcartType : " + str(indiY[3]) + " €")
     
     print("\nAutres indicateurs :")
     print ("Covariance : " + str(indiXY[0]) + "\nCoefficient de corrélation linéaire : "+ str(indiXY[1]))
@@ -218,7 +221,7 @@ def entreeMenu() :
 indicateursX = []  # Moyenne des x, 'médiane des x', variance de x, écartType de x
 indicateursY = []  # Moyenne des y, 'médiane des y', variance de y, écartType de y
 indicateursXY = [] # Covariance, 'coefficient de corrélation linéaire'
-pas = 0.00001
+pas = 0.000001
 #Fin de l'initialisation
 
 print("*  -----------------------------------------------------------------------------------  *")
@@ -260,7 +263,7 @@ while (testOK == True) :
             indicateursX, indicateursY, indicateursXY = calculIndicateurs()
             a, b = algo1(indicateursX, indicateursY, indicateursXY)
 
-        entreeSurface = int(input("\nEntrez la surface de votre appartement (nombre entier): "))  
+        entreeSurface = float(input("\nEntrez la surface de votre appartement (nombre entier): "))  
         estimationPrix(entreeSurface, a, b)
 
         print("\n\n\n\n") #Espaces pour aérer l'affichage
